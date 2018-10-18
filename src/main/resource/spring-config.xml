@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 使用注解需要 -->
+    <context:annotation-config/>
+    <!-- 扫描目录的结构，会扫描此目录下设置了注解的类，交给 spring 容器管理 -->
+    <context:component-scan base-package="com.han.dao"/>
+    <!-- 加载了 jdbc.properties 文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="jdbcConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 配置数据源 -->
+    <bean id="masterDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${master.jdbc.driverClassName}"/>
+        <property name="url" value="${master.jdbc.url}"/>
+        <property name="username" value="${master.jdbc.username}"/>
+        <property name="password" value="${master.jdbc.password}"/>
+        <!-- 初始化连接大小-->
+        <property name="initialSize" value="${jdbc.initialSize}"></property>
+        <!-- 连接池最大数量-->
+        <property name="maxActive" value="${jdbc.maxActive}"></property>
+        <!-- 连接池最大空闲-->
+        <property name="maxIdle" value="${jdbc.maxIdle}"></property>
+        <!-- 连接池最小空闲-->
+        <property name="minIdle" value="${jdbc.minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}"></property>
+        <property name="validationQuery" value="${jdbc.validationQuery}"/>
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
+        <!-- 5 min 每5分钟检測空暇连接超过10分钟的连接-->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+    </bean>
+</beans>
