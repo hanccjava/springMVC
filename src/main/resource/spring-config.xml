@@ -6,7 +6,7 @@
     <!-- 使用注解需要 -->
     <context:annotation-config/>
     <!-- 扫描目录的结构，会扫描此目录下设置了注解的类，交给 spring 容器管理 -->
-    <context:component-scan base-package="com.han.dao"/>
+    <context:component-scan base-package="com.han.dao,com.han.service"/>
     <!-- 加载了 jdbc.properties 文件 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <bean id="jdbcConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -38,4 +38,16 @@
         <!-- 5 min 每5分钟检測空暇连接超过10分钟的连接-->
         <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
     </bean>
+    <!-- mybatis文件配置，扫描所有mapper文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="masterDataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+
+        <property name="typeAliasesPackage" value="com.test.entity"/>
+
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+
+
 </beans>
