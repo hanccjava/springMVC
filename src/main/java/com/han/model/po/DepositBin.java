@@ -1,5 +1,8 @@
 package com.han.model.po;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DepositBin {
     private Integer id;
 

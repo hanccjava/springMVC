@@ -10,7 +10,7 @@
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-						connectionURL="jdbc:mysql://192.168.3.197:3306/hanoa?rewriteBatchedStatements=true"
+						connectionURL="jdbc:mysql://192.168.3.127:3306/hanoa?rewriteBatchedStatements=true"
 						userId="root"
 						password="loveu588">
 		<!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="msa" password="msa">-->
@@ -41,8 +41,8 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-		<table tableName="department"
-			   domainObjectName="Department"
+		<table tableName="deposit_bin"
+			   domainObjectName="DepositBin"
 			   enableCountByExample="false"
 			   enableUpdateByExample="false"
 			   enableDeleteByExample="false"
